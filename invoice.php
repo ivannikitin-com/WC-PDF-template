@@ -155,7 +155,7 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
             	<tr>
                 <td class="txt-left">Поставщик</td>
                 <td>Индивидуальный предприниматель</td>
-                <td><img src="Подпись-Никитин.png" alt="" /></td>
+                <td><img src="sign.png" alt="" /></td>
                 <td>Никитин И.Г. </td>
                 </tr>
                 <tr>
@@ -165,6 +165,6 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
                 	<td class="brd-top"><small>расшифровка подписи</small></td>
                 </tr>
             </table>
-            <img src="Печать-ИП-Никитин.png" alt="" / style="position: absolute;">
+            <img src="stamp.png" alt="" / style="position: absolute;">
          </footer>
 	</body>
