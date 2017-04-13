@@ -102,3 +102,60 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
 <p>Заказчик не имеет претензий по срокам, качеству и объему товаров и услуг.
 Счет выставлен на основании договора No 2016/24 от 21.07.2016. Тариф "Консалтинг. Месячный абонемент"</p>
 </div>
+<br>
+<table width="100%">
+    <tr>
+        <td>Исполнитель: </td>
+        <td>ИП Никитин Иван Геннадьевич</td>
+        <td>Заказчик: <?php echo $name_company;?></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+				<footer class="padTop0">
+                    <table class="signing">
+                    <tr>
+                        <td></td>
+                        <td>/</td>
+                        <td>Ãåíåðàëüíûé Äèðåêòîð Èâàí÷åíêî Ä.Â.</td>
+                    </tr>
+                    <tr>
+                        <td class="brd-top"><small>Ì.Ï.</small></td>
+                        <td></td>
+                        <td class="brd-top"><small>ðàñøèôðîâêà ïîäïèñè</small></td>
+                    </tr>
+                </table>
+ 			</footer>
