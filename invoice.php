@@ -1,8 +1,14 @@
 <?php
 global $wpo_wcpdf;
 do_action( 'wpo_wcpdf_before_document', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order); 
+
 //пролучение полного пути
 $dir = plugin_dir_path( __FILE__ );
+
+// URL к папке шаблона
+$template_url = get_stylesheet_directory_uri() . '/woocommerce/pdf/IvanNikitin/';
+
+
 //получаем название компании заказчика
 $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
 
@@ -155,8 +161,11 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
             	<tr>
                 <td class="txt-left">Поставщик</td>
                 <td>Индивидуальный предприниматель</td>
-                <td><img src="sign.png" alt="" /></td>
-                <td>Никитин И.Г. </td>
+                <td style="position:relative">
+					<img src="<?php echo $template_url ?>sign.png" alt="" style="width:4cm" />
+					<img src="<?php echo $template_url ?>stamp.png" alt="" / style="width:45mm;position: absolute;top:5mm;left:0">
+				</td>
+				<td>Никитин И.Г. </td>
                 </tr>
                 <tr>
                 	<td></td>
@@ -165,6 +174,5 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
                 	<td class="brd-top"><small>расшифровка подписи</small></td>
                 </tr>
             </table>
-            <img src="stamp.png" alt="" / style="position: absolute;">
          </footer>
 	</body>
