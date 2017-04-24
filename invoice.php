@@ -137,7 +137,7 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
 		//получаем нужные нам данные
 	$price_sub = $price['order_total']['value'];
 		//
-	$price_natual = price_delimiter($price_sub);
+	$price_natual = price_delimite($price_sub);
 	
 	?>
            <table width="100%">
@@ -152,7 +152,7 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
            				</table>
            		</tr>
            </table>           
-             <p>Всего к оплате: <?php echo number_in_words($price_natual['price']); ?>  </p>
+             <p>Всего к оплате: <?php echo number($price_natual['price']); ?>  </p>
              <hr>
               <footer>
              <p>Счет выставлен на основании договора № 2016/24 от 21.07.2016. Тариф "Консалтинг. Месячный абонемент"</p>

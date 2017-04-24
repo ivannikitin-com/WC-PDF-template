@@ -78,7 +78,7 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
 		//получаем нужные нам данные
 	$price_sub = $price['order_total']['value'];
 		//
-	$price_natual = price_delimiter($price_sub);
+	$price_natual = price_delimite($price_sub);
 	
 	?>
            <table width="100%">
@@ -145,17 +145,24 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
         <td></td>
     </tr>
 </table>
-				<footer class="padTop0">
-                    <table class="signing">
-                    <tr>
-                        <td></td>
-                        <td>/</td>
-                        <td>Ãåíåðàëüíûé Äèðåêòîð Èâàí÷åíêî Ä.Â.</td>
-                    </tr>
-                    <tr>
-                        <td class="brd-top"><small>Ì.Ï.</small></td>
-                        <td></td>
-                        <td class="brd-top"><small>ðàñøèôðîâêà ïîäïèñè</small></td>
-                    </tr>
-                </table>
- 			</footer>
+	              <footer>
+             <p>Счет выставлен на основании договора № 2016/24 от 21.07.2016. Тариф "Консалтинг. Месячный абонемент"</p>
+         
+            <table class="signing">
+            	<tr>
+                <td class="txt-left">Поставщик</td>
+                <td>Индивидуальный предприниматель</td>
+                <td style="position:relative">
+					<img src="<?php echo $template_url ?>sign.png" alt="" style="width:4cm" />
+					<img src="<?php echo $template_url ?>stamp.png" alt="" / style="width:45mm;position: absolute;top:5mm;left:0">
+				</td>
+				<td>Никитин И.Г. </td>
+                </tr>
+                <tr>
+                	<td></td>
+                	<td class="brd-top"><small>должность</small></td>
+                	<td class="brd-top"><small>подпись</small></td>
+                	<td class="brd-top"><small>расшифровка подписи</small></td>
+                </tr>
+            </table>
+         </footer>
