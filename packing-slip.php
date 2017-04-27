@@ -145,7 +145,7 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
         <td></td>
     </tr>
 </table>
-	              <footer>
+<footer>
              <p>Счет выставлен на основании договора № 2016/24 от 21.07.2016. Тариф "Консалтинг. Месячный абонемент"</p>
          
             <table class="signing">
