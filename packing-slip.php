@@ -95,7 +95,7 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
            </table> 
            <br>
            <br>          
-             <p>Общая стоимость выполненных работ, оказанных услуг: <?php echo number_in_words($price_natual['price']); ?>  </p>
+             <p>Общая стоимость выполненных работ, оказанных услуг: <?php echo number($price_natual['price']); ?>  </p>
              <hr>
 
  <div class="mrgLeft0 padTop clearfix">
@@ -103,45 +103,67 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
 Счет выставлен на основании договора No 2016/24 от 21.07.2016. Тариф "Консалтинг. Месячный абонемент"</p>
 </div>
 <br>
-<table width="100%">
+<table width="100%" class="table_pack_slip">
     <tr>
         <td>Исполнитель: </td>
-        <td>ИП Никитин Иван Геннадьевич</td>
-        <td>Заказчик: <?php echo $name_company;?></td>
+        <td><b>ИП Никитин Иван Геннадьевич</b></td>
+        <td>Заказчик:</td>
+        <td><b><?php echo $name_company;?></b></td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
+        <td>ИНН</td>
+        <td> <span class="inn">501810901400</span> КПП__________</td>
+        <td>ИНН</td>
         <td></td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
+        <td> Адрес</td>
+        <td>
+            <span class="city">141067, Московская обл., г. Королев,
+            мкр Болшево, ул. Комитетский Лес, д.
+            10, кв. 25</span>         
+        </td>
+        <td>Адрес</td>
         <td></td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
+        <td>Р/с</td>
+        <td>
+            <span class="text">40802810102680000003</span>
+        </td>
+        <td>Р/c</td>
         <td></td>
     </tr>
     <tr>
+        <td>К/с</td>
+        <td>
+            <span class="text">40802810102680000003</span>
+        </td>
+        <td>К/с</td>
         <td></td>
+    </tr>
+    <tr>
+        <td>Банк</td>
+        <td>
+            <span class="text">АО "АЛЬФА-БАНК" г. МОСКВА</span>
+        </td>
+        <td>Банк</td>
         <td></td>
+    </tr>
+    <tr>
+        <td>БИК</td>
+        <td>
+            <span class="text">044525593</span>
+        </td>
+        <td>БИК</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Телефон</td>
+        <td>
+            <span class="text">+7 (495) 565-34-88</span>
+        </td>
+        <td>Телефон</td>
         <td></td>
     </tr>
 </table>
