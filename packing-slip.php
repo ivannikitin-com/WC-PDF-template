@@ -4,6 +4,9 @@ global $wpo_wcpdf;
 $dir = plugin_dir_path( __FILE__ );
 //получаем название компании заказчика
 $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
+
+//получаем путь до папки 
+$template_url = path();
  ?>
 <?php do_action( 'wpo_wcpdf_before_document', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order ); ?>
    <header class="txt-right">
@@ -175,8 +178,8 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
                 <td class="txt-left">Поставщик</td>
                 <td>Индивидуальный предприниматель</td>
                 <td style="position:relative">
-					<img src="<?php echo $template_url ?>sign.png" alt="" style="width:4cm" />
-					<img src="<?php echo $template_url ?>stamp.png" alt="" / style="width:45mm;position: absolute;top:5mm;left:0">
+					<img src="<?php echo $template_url ?>/sign.png" alt="" style="width:4cm" />
+					<img src="<?php echo $template_url ?>/stamp.png" alt="" / style="width:45mm;position: absolute;top:5mm;left:0">
 				</td>
 				<td>Никитин И.Г. </td>
                 </tr>

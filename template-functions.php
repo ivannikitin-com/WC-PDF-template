@@ -140,3 +140,7 @@ function number($number) {
 			);
 		return $mass;
 	}
+        
+        function path(){
+            return plugin_dir_path( __FILE__ );
+        }
