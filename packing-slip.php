@@ -2,11 +2,10 @@
 global $wpo_wcpdf;
 //пролучение полного пути
 $dir = plugin_dir_path( __FILE__ );
-//получаем название компании заказчика
-$name_company = $wpo_wcpdf->export->order->data['billing']['company'];
-
-//получаем путь до папки 
 $template_url = path();
+//получаем данные клиента
+$client = customer_data();
+
  ?>
 <?php do_action( 'wpo_wcpdf_before_document', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order ); ?>
    <header class="txt-right">
@@ -28,7 +27,7 @@ $template_url = path();
     		</tr>
     		<tr>
     			<td>Заказчик:</td>
-    			<td><h4><?php echo $name_company;?></h4></td>
+    			<td><h4><?php echo $client['name_company'];?></h4></td>
     		</tr>
     	</table>
     <br>
@@ -111,13 +110,13 @@ $template_url = path();
         <td>Исполнитель: </td>
         <td><b>ИП Никитин Иван Геннадьевич</b></td>
         <td>Заказчик:</td>
-        <td><b><?php echo $name_company;?></b></td>
+        <td><b><?php echo $client['name_company'];?></b></td>
     </tr>
     <tr>
         <td>ИНН</td>
         <td> <span class="inn">501810901400</span> КПП__________</td>
         <td>ИНН</td>
-        <td></td>
+        <td><?php echo $client['inn']; ?></td>
     </tr>
     <tr>
         <td> Адрес</td>
@@ -127,7 +126,7 @@ $template_url = path();
             10, кв. 25</span>         
         </td>
         <td>Адрес</td>
-        <td></td>
+        <td><?php echo $client['address']; ?></td>
     </tr>
     <tr>
         <td>Р/с</td>
@@ -135,7 +134,7 @@ $template_url = path();
             <span class="text">40802810102680000003</span>
         </td>
         <td>Р/c</td>
-        <td></td>
+        <td><?php echo $client['account']; ?></td>
     </tr>
     <tr>
         <td>К/с</td>
@@ -143,7 +142,7 @@ $template_url = path();
             <span class="text">40802810102680000003</span>
         </td>
         <td>К/с</td>
-        <td></td>
+        <td><?php echo $client['kpp']; ?></td>
     </tr>
     <tr>
         <td>Банк</td>
@@ -151,7 +150,7 @@ $template_url = path();
             <span class="text">АО "АЛЬФА-БАНК" г. МОСКВА</span>
         </td>
         <td>Банк</td>
-        <td></td>
+        <td><?php echo $client['name_bank']; ?></td>
     </tr>
     <tr>
         <td>БИК</td>
@@ -159,7 +158,7 @@ $template_url = path();
             <span class="text">044525593</span>
         </td>
         <td>БИК</td>
-        <td></td>
+        <td><?php echo $client['blc']; ?></td>
     </tr>
     <tr>
         <td>Телефон</td>
@@ -167,7 +166,7 @@ $template_url = path();
             <span class="text">+7 (495) 565-34-88</span>
         </td>
         <td>Телефон</td>
-        <td></td>
+        <td><?php echo $client['phone']; ?></td>
     </tr>
 </table>
 <footer>
