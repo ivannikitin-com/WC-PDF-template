@@ -129,36 +129,37 @@ function number($number) {
 	// преобразуем переменную в текст и возвращаем из функции, ура!
 	return join(' ', $string);
 }
-//
-	function price_delimite($price_wc){
-		$one_price = explode(".", $price_wc);
-		$pr = $one_price[0];
-		$cent = explode(" ", $pr[1]);
-		$cent_pr = $cent[0];
-		$mass = array(
-			"price" => $pr,
-			"cent" => $cent_pr
-			);
-		return $mass;
-	}
+
+//разделитель суммы
+function price_delimite($price_wc){
+    $one_price = explode(".", $price_wc);
+    $pr = $one_price[0];
+    $cent = explode(" ", $pr[1]);
+    $cent_pr = $cent[0];
+    $mass = array(
+        "price" => $pr,
+        "cent" => $cent_pr
+    );
+    return $mass;
+}	
         
-        function path(){
-            return plugin_dir_path( __FILE__ );
-        }
+function path(){
+    return plugin_dir_path( __FILE__ );
+}
         
-        //возвращаем данные клиента
-        function customer_data(){
-            global $wpo_wcpdf;
-            return array(
-                "name_company" => $wpo_wcpdf->export->order->data['billing']['company'],  
-                "phone" => $wpo_wcpdf->export->order->data['billing']['[phone'],
-                "address" => $wpo_wcpdf->export->order->data['billing']['address_1'],
-                //получаем платёжные данные покупателя
-                "inn" => $wpo_wcpdf->export->order->meta_data['1']->value,
-                "kpp" => $wpo_wcpdf->export->order->meta_data['2']->value,
-                "orgn" => $wpo_wcpdf->export->order->meta_data['3']->value,
-                "account" => $wpo_wcpdf->export->order->meta_data['4']->value, //расчетный счёт
-                "name_bank" => $wpo_wcpdf->export->order->meta_data['5']->value,
-                "blc" => $wpo_wcpdf->export->order->meta_data['6']->value
-            );
-        }
+//возвращаем данные клиента
+function customer_data(){
+     global $wpo_wcpdf;
+     return array(
+        "name_company" => $wpo_wcpdf->export->order->data['billing']['company'],  
+        "phone" => $wpo_wcpdf->export->order->data['billing']['[phone'],
+        "address" => $wpo_wcpdf->export->order->data['billing']['address_1'],
+        //получаем платёжные данные покупателя
+        "inn" => $wpo_wcpdf->export->order->meta_data['1']->value,
+        "kpp" => $wpo_wcpdf->export->order->meta_data['2']->value,
+        "orgn" => $wpo_wcpdf->export->order->meta_data['3']->value,
+        "account" => $wpo_wcpdf->export->order->meta_data['4']->value, //расчетный счёт
+        "name_bank" => $wpo_wcpdf->export->order->meta_data['5']->value,
+        "blc" => $wpo_wcpdf->export->order->meta_data['6']->value                
+    );      
+}
