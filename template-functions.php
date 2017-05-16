@@ -1,5 +1,5 @@
 <?php
-global $wpo_wcpdf;
+
 /**
  * Use this file for all your template filters and actions.
  * Requires WooCommerce PDF Invoices & Packing Slips 1.4.13 or higher
@@ -118,8 +118,8 @@ function number($number) {
 				$digits[$j] = $dic[0][$digit];
 			}
 			
-			// добавляем обозначение порядка или валюту, через собаку вызвываем, чтобы не было ошибок
-			$digits[] = @($dic[1][$i][(($last%=100)>4 && $last<20) ? 2 : $dic[2][min($last%10,5)]]);
+			// добавляем обозначение порядка или валюту
+			$digits[] = $dic[1][$i][(($last%=100)>4 && $last<20) ? 2 : $dic[2][min($last%10,5)]];
 			
 			// объединяем составные числа в единый текст и добавляем в переменную, которую вернет функция
 			array_unshift($string, join(' ', $digits));
@@ -150,9 +150,8 @@ function number($number) {
         function customer_data(){
             global $wpo_wcpdf;
             return array(
-                //получаем данные компании покупателя
                 "name_company" => $wpo_wcpdf->export->order->data['billing']['company'],  
-                "phone" => $wpo_wcpdf->export->order->data['billing']['phone'],
+                "phone" => $wpo_wcpdf->export->order->data['billing']['[phone'],
                 "address" => $wpo_wcpdf->export->order->data['billing']['address_1'],
                 //получаем платёжные данные покупателя
                 "inn" => $wpo_wcpdf->export->order->meta_data['1']->value,
