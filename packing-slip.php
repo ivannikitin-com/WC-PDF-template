@@ -6,7 +6,7 @@ $template_url = path();
 //получаем данные клиента
 $client = customer_data();
 
- ?>
+?>
 <?php do_action( 'wpo_wcpdf_before_document', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order ); ?>
    <header class="txt-right">
        <?php
