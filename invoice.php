@@ -6,7 +6,7 @@ do_action( 'wpo_wcpdf_before_document', $wpo_wcpdf->export->template_type, $wpo_
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
 // URL к папке шаблона
-$template_url = path();
+$template_url = get_stylesheet_directory_uri() . '/woocommerce/pdf/IvanNikitin/';
 
 $client = customer_data();
 

@@ -83,12 +83,25 @@ function customer_data(){
         "phone" => $wpo_wcpdf->export->order->data['billing']['phone'],
         "address" => $wpo_wcpdf->export->order->data['billing']['address_1'],
         //получаем платёжные данные покупателя
-        "inn" => $wpo_wcpdf->export->order->meta_data['1']->value,
-        "kpp" => $wpo_wcpdf->export->order->meta_data['2']->value,
-        "orgn" => $wpo_wcpdf->export->order->meta_data['3']->value,
-         "total_order" => $wpo_wcpdf->export->order->data['total'],
-        "account" => $wpo_wcpdf->export->order->meta_data['4']->value, //расчетный счёт
-        "name_bank" => $wpo_wcpdf->export->order->meta_data['5']->value,
-        "blc" => $wpo_wcpdf->export->order->meta_data['6']->value                
+        "inn" => get_order_meta('_billing_inn'),
+        "kpp" => get_order_meta('_billing_kpp'),
+        "orgn" => get_order_meta('_billing_ogrn'),
+        "total_order" => get_order_meta('total'),
+        "account" => get_order_meta('_billing_account'), //расчетный счёт
+        "name_bank" => get_order_meta('_billing_bank'),
+        "blc" => get_order_meta('_billing_bic')                
     );      
 }
+
+
+function get_order_meta( $key )
+{
+	global $wpo_wcpdf;
+	$meta = $wpo_wcpdf->export->order->meta_data;
+	foreach ($meta as $obj ) {
+		if ( $obj->key == $key ) 
+			return $obj->value;
+	}
+	return false;	
+}
+

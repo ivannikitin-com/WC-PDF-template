@@ -2,9 +2,14 @@
 global $wpo_wcpdf;
 //пролучение полного пути
 $dir = plugin_dir_path( __FILE__ );
-$template_url = path();
+$template_url = get_stylesheet_directory_uri() . '/woocommerce/pdf/IvanNikitin/';
 //получаем данные клиента
 $client = customer_data();
+
+$client_data = $wpo_wcpdf->export->order->meta_data;
+WP_DEBUG && file_put_contents(get_stylesheet_directory(). '/woocommerce/pdf/IvanNikitin/client.log', var_export($client_data, true));
+
+
 //ini_set('error_reporting', E_ALL);
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
@@ -121,8 +126,7 @@ $client = customer_data();
         <td> Адрес</td>
         <td>
             <span class="city">141067, Московская обл., г. Королев,
-            мкр Болшево, ул. Комитетский Лес, д.
-            10, кв. 25</span>         
+            мкр Болшево, ул. Комитетский Лес, д. 10, кв. 25</span>         
         </td>
         <td>Адрес</td>
         <td><?php echo $client['address']; ?></td>
@@ -193,7 +197,6 @@ $client = customer_data();
     </tr>
 </table>
 <footer>
-             <p>Счет выставлен на основании договора № 2016/24 от 21.07.2016</p>
          
             <table class="signing">
             	<tr>
