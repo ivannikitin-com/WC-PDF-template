@@ -145,7 +145,7 @@ $client = customer_data();
              <p>Всего к оплате: <?php echo num2str($client['total_order']); ?>  </p>
              <hr>
               <footer>
-             <p>Счет выставлен на основании договора № 2016/24 от 21.07.2016. Тариф "Консалтинг. Месячный абонемент"</p>
+            
          
             <table class="signing">
             	<tr>
