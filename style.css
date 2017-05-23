@@ -12,6 +12,7 @@
 	font-weight: bold;
 	src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/k3k702ZOKiLJc3WVjuplzMDdSZkkecOE1hvV7ZHvhyU.ttf) format('truetype');
 }
+
 @font-face {
 	font-family: 'Open Sans';
 	font-style: italic;
@@ -453,4 +454,14 @@ h1.brd-bott{
 }
 .info tr td:nth-of-type(2n){
 	border-bottom: 1px solid #000;
+}
+td.header img {
+    /* width: 215px; */
+    /* height: 100px; */
+    max-width: 250px;
+}
+header img {
+    max-width: 25;
+    width: 225px;
+    height: 127px;
 }
