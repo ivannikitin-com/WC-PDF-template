@@ -2,13 +2,13 @@
 global $wpo_wcpdf;
 do_action( 'wpo_wcpdf_before_document', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order); 
 
-
+//ini_set('error_reporting', E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
 // URL к папке шаблона
 $template_url = path();
 
-
-//получаем название компании заказчика
-$name_company = $wpo_wcpdf->export->order->data['billing']['company'];
+$client = customer_data();
 
 ?>
 	<?php do_action( 'wpo_wcpdf_before_order_data', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order ); ?>
@@ -27,12 +27,12 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
                     <td class="header">
                     	<?php
                     	//лого
-						if( $wpo_wcpdf->get_header_logo_id() ) {
-							$wpo_wcpdf->header_logo();
-						} else {
-							echo apply_filters( 'wpo_wcpdf_invoice_title', __( 'Invoice', 'wpo_wcpdf' ) );
-						}
-						?>
+			if( $wpo_wcpdf->get_header_logo_id() ) {
+                            $wpo_wcpdf->header_logo();
+			} else {
+                            echo apply_filters( 'wpo_wcpdf_invoice_title', __( 'Invoice', 'wpo_wcpdf' ) );
+			}			
+			?>
                     </td>
                 </tr>
             </table>		
@@ -82,9 +82,9 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
             <table>
             <tbody>
             	<tr>
-            		<td>Поставщик:</td><td>Индивидуальный предприниматель Никитин Иван Геннадьевич</td>
+                    <td>Поставщик:</td><td>Индивидуальный предприниматель Никитин Иван Геннадьевич</td>
                 </tr> 
-            		<tr><td>Покупатель:</td><td><?php echo $name_company;?></td></tr>
+                    <tr><td>Покупатель:</td><td><?php echo $client['name_company'];?></td></tr>
             </tbody>
             </table>
         </section>
@@ -129,28 +129,20 @@ $name_company = $wpo_wcpdf->export->order->data['billing']['company'];
 		<?php endforeach; endif; ?>
 	</tbody>
 	</table>
-	<?php
-		//получаем итоговую цену
-	$price = $wpo_wcpdf->get_woocommerce_totals();
-		//получаем нужные нам данные
-	$price_sub = $price['order_total']['value'];
-		//
-	$price_natual = price_delimite($price_sub);
-	
-	?>
+        <pre>
            <table width="100%">
-           		<tr>
-           			<td width="60%"></td>
-           			<td width="40%">
-           				<table width="100%">
-           					<tr>
-           					<td align="center"><h4>Итого к оплате:</h4></td>
-           					<td align="right"><h4><?php echo $price['order_total']['value']; ?></h4></td>
-           					</tr>
-           				</table>
+           	<tr>
+                    <td width="60%"></td>
+                    <td width="40%">
+                            <table width="100%">
+                                <tr>
+                                    <td align="center"><h4>Итого к оплате:</h4></td>
+                                    <td align="right"><h4><?php echo $client['total_order']; ?></h4></td>
+                                </tr>
+                            </table>
            		</tr>
            </table>           
-             <p>Всего к оплате: <?php echo number($price_natual['price']); ?>  </p>
+             <p>Всего к оплате: <?php echo num2str($client['total_order']); ?>  </p>
              <hr>
               <footer>
              <p>Счет выставлен на основании договора № 2016/24 от 21.07.2016. Тариф "Консалтинг. Месячный абонемент"</p>

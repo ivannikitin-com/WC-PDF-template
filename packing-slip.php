@@ -5,7 +5,9 @@ $dir = plugin_dir_path( __FILE__ );
 $template_url = path();
 //получаем данные клиента
 $client = customer_data();
-
+//ini_set('error_reporting', E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
 ?>
 <?php do_action( 'wpo_wcpdf_before_document', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order ); ?>
    <header class="txt-right">
@@ -74,15 +76,6 @@ $client = customer_data();
 		<?php endforeach; endif; ?>
 	</tbody>
 	</table>
-	<?php
-		//получаем итоговую цену
-	$price = $wpo_wcpdf->get_woocommerce_totals();
-		//получаем нужные нам данные
-	$price_sub = $price['order_total']['value'];
-		//
-	$price_natual = price_delimite($price_sub);
-	
-	?>
            <table width="100%">
            		<tr>
            			<td width="60%"></td>
@@ -90,14 +83,14 @@ $client = customer_data();
            				<table width="100%">
            					<tr>
            					<td align="center"><h4>Итого к оплате:</h4></td>
-           					<td align="right"><h4><?php echo $price['order_total']['value']; ?></h4></td>
+           					<td align="right"><h4><?php echo $client['total_order']; ?></h4></td>
            					</tr>
            				</table>
            		</tr>
            </table> 
            <br>
            <br>          
-             <p>Общая стоимость выполненных работ, оказанных услуг: <?php echo number($price_natual['price']); ?>  </p>
+             <p>Общая стоимость выполненных работ, оказанных услуг: <?php echo num2str($client['total_order']); ?>  </p>
              <hr>
 
  <div class="mrgLeft0 padTop clearfix">
