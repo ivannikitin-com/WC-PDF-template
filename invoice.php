@@ -152,8 +152,8 @@ $client = customer_data();
                 <td class="txt-left">Поставщик</td>
                 <td>Индивидуальный предприниматель</td>
                 <td style="position:relative">
-					<img src="<?php echo $template_url ?>/sign.png" alt="" style="width:4cm" />
-					<img src="<?php echo $template_url ?>/stamp.png" alt="" / style="width:45mm;position: absolute;top:5mm;left:0">
+					<img src="<?php echo $template_url ?>sign.png" alt="" style="width:4cm" />
+					<img src="<?php echo $template_url ?>stamp.png" alt="" / style="width:45mm;position: absolute;top:5mm;left:0">
 				</td>
 				<td>Никитин И.Г. </td>
                 </tr>

@@ -107,8 +107,15 @@ $client = customer_data();
     <tr>
         <td>ИНН</td>
         <td> <span class="inn">501810901400</span> КПП__________</td>
-        <td>ИНН</td>
-        <td><?php echo $client['inn']; ?></td>
+        <?php
+            if($client['inn']){
+        ?>
+         <td>ИНН</td>
+         <td><?php echo $client['inn']; ?></td>
+        <?php
+            }
+        ?>
+
     </tr>
     <tr>
         <td> Адрес</td>
@@ -125,32 +132,56 @@ $client = customer_data();
         <td>
             <span class="text">40802810102680000003</span>
         </td>
+       <?php
+        if($client['account']){
+       ?>
         <td>Р/c</td>
         <td><?php echo $client['account']; ?></td>
+       <?php
+        }
+       ?>    
     </tr>
     <tr>
         <td>К/с</td>
         <td>
             <span class="text">40802810102680000003</span>
         </td>
-        <td>К/с</td>
-        <td><?php echo $client['kpp']; ?></td>
+          <?php 
+            if($client['kpp']){
+            ?>
+                <td>К/с</td>
+                <td><?php echo $client['kpp']; ?></td>
+            <?php
+            }
+            ?>
     </tr>
     <tr>
         <td>Банк</td>
         <td>
             <span class="text">АО "АЛЬФА-БАНК" г. МОСКВА</span>
         </td>
-        <td>Банк</td>
-        <td><?php echo $client['name_bank']; ?></td>
+        <?php
+            if($client['name_bank']){
+        ?>
+           <td>Банк</td>
+           <td><?php echo $client['name_bank']; ?></td>
+        <?php
+            }
+        ?>
     </tr>
     <tr>
         <td>БИК</td>
         <td>
             <span class="text">044525593</span>
         </td>
-        <td>БИК</td>
-        <td><?php echo $client['blc']; ?></td>
+            <?php 
+            if($client['blc']){
+            ?>
+                <td>БИК</td>
+                <td><?php echo $client['blc']; ?></td>
+            <?php
+            }
+            ?>
     </tr>
     <tr>
         <td>Телефон</td>
@@ -169,8 +200,8 @@ $client = customer_data();
                 <td class="txt-left">Поставщик</td>
                 <td>Индивидуальный предприниматель</td>
                 <td style="position:relative">
-					<img src="<?php echo $template_url ?>/sign.png" alt="" style="width:4cm" />
-					<img src="<?php echo $template_url ?>/stamp.png" alt="" / style="width:45mm;position: absolute;top:5mm;left:0">
+					<img src="<?php echo $template_url ?>sign.png" alt="" style="width:4cm" />
+					<img src="<?php echo $template_url ?>stamp.png" alt="" / style="width:45mm;position: absolute;top:5mm;left:0">
 				</td>
 				<td>Никитин И.Г. </td>
                 </tr>
