@@ -89,7 +89,7 @@ function customer_data(){
         "total_order" => get_order_meta('total'),
         "account" => get_order_meta('_billing_account'), //расчетный счёт
         "name_bank" => get_order_meta('_billing_bank'),
-        "blc" => get_order_meta('_billing_bic')                
+        "bic" => get_order_meta('_billing_bic')                
     );      
 }
 

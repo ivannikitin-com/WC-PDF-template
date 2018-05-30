@@ -1,29 +1,15 @@
 <?php 
 global $wpo_wcpdf;
-//пролучение полного пути
-$dir = plugin_dir_path( __FILE__ );
+do_action( 'wpo_wcpdf_before_document', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order );
+
+// URL к папке шаблона
 $template_url = get_stylesheet_directory_uri() . '/woocommerce/pdf/IvanNikitin/';
-//получаем данные клиента
+// Данные клиента
 $client = customer_data();
-
-$client_data = $wpo_wcpdf->export->order->meta_data;
-WP_DEBUG && file_put_contents(get_stylesheet_directory(). '/woocommerce/pdf/IvanNikitin/client.log', var_export($client_data, true));
-
-
-//ini_set('error_reporting', E_ALL);
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
 ?>
-<?php do_action( 'wpo_wcpdf_before_document', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order ); ?>
    <header class="txt-right">
-       <?php
-		if( $wpo_wcpdf->get_header_logo_id() ) {
-			$wpo_wcpdf->header_logo();
-		} else {
-			echo apply_filters( 'wpo_wcpdf_packing_slip_title', __( 'Packing Slip', 'wpo_wcpdf' ) );
-		}
-		?>
-    </header>
+		<img src="<?php echo $template_url ?>logo-215x99.png" style="width:215px;height:98px">	
+	</header>
     <h2 class="brd-bott" align="center">АКТ № <?php $wpo_wcpdf->invoice_number(); ?> от <?php $wpo_wcpdf->order_date(); ?></h2>
     <br>
     <section class="brd-bott">
@@ -34,7 +20,15 @@ WP_DEBUG && file_put_contents(get_stylesheet_directory(). '/woocommerce/pdf/Ivan
     		</tr>
     		<tr>
     			<td>Заказчик:</td>
-    			<td><h4><?php echo $client['name_company'];?></h4></td>
+    			<td><h4>
+						<?php echo $client['name_company'] ?>,
+						<?php if ( ! empty( $client['inn'] ) ): ?>
+							ИНН <?php echo $client['inn'] ?>,
+						<?php endif; ?>
+						<?php if ( ! empty( $client['kpp'] ) ): ?>
+							КПП <?php echo $client['kpp'] ?>,
+						<?php endif; ?>					
+				</h4></td>
     		</tr>
     	</table>
     <br>
@@ -67,20 +61,20 @@ WP_DEBUG && file_put_contents(get_stylesheet_directory(). '/woocommerce/pdf/Ivan
 				<span class="item-name"><?php echo $item['name']; ?></span>
 				<?php do_action( 'wpo_wcpdf_before_item_meta', $wpo_wcpdf->export->template_type, $item, $wpo_wcpdf->export->order  ); ?>
 				<span class="item-meta"><?php echo $item['meta']; ?></span>
-				<dl class="meta">
-					<?php $description_label = __( 'SKU', 'wpo_wcpdf' ); // registering alternate label translation ?>
-					<?php if( !empty( $item['sku'] ) ) : ?><dt class="sku"><?php _e( 'SKU:', 'wpo_wcpdf' ); ?></dt><dd class="sku"><?php echo $item['sku']; ?></dd><?php endif; ?>
-					<?php if( !empty( $item['weight'] ) ) : ?><dt class="weight"><?php _e( 'Weight:', 'wpo_wcpdf' ); ?></dt><dd class="weight"><?php echo $item['weight']; ?><?php echo get_option('woocommerce_weight_unit'); ?></dd><?php endif; ?>
-				</dl>
+
 				<?php do_action( 'wpo_wcpdf_after_item_meta', $wpo_wcpdf->export->template_type, $item, $wpo_wcpdf->export->order  ); ?>
 			</td>
 			<td class="quantity"><?php echo $item['quantity']; ?></td>
-			<td class="price"><?php echo $item['price']; ?></td>
-			<td class="price"><?php echo $item['price'];?></td>
+			<td class="price"><?php echo $item['single_line_total']; ?></td>
+			<td class="price"><?php echo $item['line_total'];?></td>
 		</tr>
 		<?php endforeach; endif; ?>
 	</tbody>
 	</table>
+   <?php
+	   $totals = $this->get_woocommerce_totals();
+	   $order_total = $totals['order_total']['value'];
+   ?>		
            <table width="100%">
            		<tr>
            			<td width="60%"></td>
@@ -88,38 +82,37 @@ WP_DEBUG && file_put_contents(get_stylesheet_directory(). '/woocommerce/pdf/Ivan
            				<table width="100%">
            					<tr>
            					<td align="center"><h4>Итого к оплате:</h4></td>
-           					<td align="right"><h4><?php echo $client['total_order']; ?></h4></td>
+           					<td align="right"><h4><?php echo $order_total ?></h4></td>
            					</tr>
+           					<tr>
+           					<td align="center"><h4>В том числе НДС:</h4></td>
+           					<td align="right"><h4>Без НДС</h4></td>
+           					</tr>							
            				</table>
            		</tr>
            </table> 
            <br>
-           <br>          
-             <p>Общая стоимость выполненных работ, оказанных услуг: <?php echo num2str($client['total_order']); ?>  </p>
+           <br>      
+			<?php $total_val = $this->order->get_total(); ?>
+             <p>Общая стоимость выполненных работ, оказанных услуг: <?php echo num2str( $total_val ); ?>  </p>
              <hr>
-
+			<p>Заказчик не имеет претензий по срокам, качеству и объему товаров и услуг.</p>
  <div class="mrgLeft0 padTop clearfix">
-<p>Заказчик не имеет претензий по срокам, качеству и объему товаров и услуг.</p>
+
 </div>
 <br>
 <table width="100%" class="table_pack_slip">
     <tr>
-        <td>Исполнитель: </td>
-        <td><b>ИП Никитин Иван Геннадьевич</b></td>
-        <td>Заказчик:</td>
-        <td><b><?php echo $client['name_company'];?></b></td>
+        <td style="width:15%">Исполнитель: </td>
+        <td style="width:35%"><b>ИП Никитин Иван Геннадьевич</b></td>
+        <td style="width:15%">Заказчик:</td>
+        <td style="width:35%"><b><?php echo $client['name_company'];?></b></td>
     </tr>
     <tr>
         <td>ИНН</td>
-        <td> <span class="inn">501810901400</span> КПП__________</td>
-        <?php
-            if($client['inn']){
-        ?>
+        <td> <span class="inn">501810901400</span></td>
          <td>ИНН</td>
          <td><?php echo $client['inn']; ?></td>
-        <?php
-            }
-        ?>
 
     </tr>
     <tr>
@@ -136,56 +129,32 @@ WP_DEBUG && file_put_contents(get_stylesheet_directory(). '/woocommerce/pdf/Ivan
         <td>
             <span class="text">40802810102680000003</span>
         </td>
-       <?php
-        if($client['account']){
-       ?>
         <td>Р/c</td>
-        <td><?php echo $client['account']; ?></td>
-       <?php
-        }
-       ?>    
+        <td><?php echo $client['account']; ?></td>   
     </tr>
     <tr>
         <td>К/с</td>
         <td>
             <span class="text">40802810102680000003</span>
         </td>
-          <?php 
-            if($client['kpp']){
-            ?>
                 <td>К/с</td>
-                <td><?php echo $client['kpp']; ?></td>
-            <?php
-            }
-            ?>
+                <td>&nbsp;</td>
     </tr>
     <tr>
         <td>Банк</td>
         <td>
             <span class="text">АО "АЛЬФА-БАНК" г. МОСКВА</span>
         </td>
-        <?php
-            if($client['name_bank']){
-        ?>
            <td>Банк</td>
            <td><?php echo $client['name_bank']; ?></td>
-        <?php
-            }
-        ?>
     </tr>
     <tr>
         <td>БИК</td>
         <td>
             <span class="text">044525593</span>
         </td>
-            <?php 
-            if($client['blc']){
-            ?>
                 <td>БИК</td>
                 <td><?php echo $client['blc']; ?></td>
-            <?php
-            }
-            ?>
     </tr>
     <tr>
         <td>Телефон</td>
@@ -195,24 +164,20 @@ WP_DEBUG && file_put_contents(get_stylesheet_directory(). '/woocommerce/pdf/Ivan
         <td>Телефон</td>
         <td><?php echo $client['phone']; ?></td>
     </tr>
+	<tr>
+        <td style="padding-top:40px;">Никитин И.Г.</td>
+		<td style="position:relative;border-bottom: 1px solid #000">
+			<img src="<?php echo $template_url ?>sign.png" alt="" style="width:4cm" />
+			<img src="<?php echo $template_url ?>stamp.png" alt="" / style="width:45mm;position: absolute;top:5mm;left:0">
+		</td>		
+        <td>&nbsp;</td>
+		<td style="border-bottom: 1px solid #000">&nbsp;</td>		
+	</tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td style="text-align:center">подпись<br><br>МП</td>
+        <td>&nbsp;</td>
+        <td style="text-align:center">подпись<br><br>МП</td>
+    </tr>	
 </table>
-<footer>
-         
-            <table class="signing">
-            	<tr>
-                <td class="txt-left">Поставщик</td>
-                <td>Индивидуальный предприниматель</td>
-                <td style="position:relative">
-					<img src="<?php echo $template_url ?>sign.png" alt="" style="width:4cm" />
-					<img src="<?php echo $template_url ?>stamp.png" alt="" / style="width:45mm;position: absolute;top:5mm;left:0">
-				</td>
-				<td>Никитин И.Г. </td>
-                </tr>
-                <tr>
-                	<td></td>
-                	<td class="brd-top"><small>должность</small></td>
-                	<td class="brd-top"><small>подпись</small></td>
-                	<td class="brd-top"><small>расшифровка подписи</small></td>
-                </tr>
-            </table>
-         </footer>
+
