@@ -37,7 +37,7 @@ body {
 	color: #000;
 	margin: 0cm;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 9pt;
+	font-size: 8pt;
 	line-height: 100%; /* fixes inherit dompdf bug */
 }
 
@@ -47,12 +47,12 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-	font-size: 16pt;
+	font-size: 14pt;
 	margin: 5mm 0;
 }
 
 h2 {
-	font-size: 14pt;
+	font-size: 12pt;
 }
 
 h3, h4 {
@@ -126,7 +126,7 @@ td.header img {
 }
 
 td.header {
-	font-size: 16pt;
+	font-size: 14pt;
 	font-weight: 700;
 }
 
@@ -212,8 +212,8 @@ dl {
 
 dt, dd, dd p {
 	display: inline;
-	font-size: 7pt;
-	line-height: 7pt;
+	font-size: 8pt;
+	line-height: 100%;
 }
 
 dd {
@@ -228,7 +228,7 @@ dd:after {
 .wc-item-meta {
 	margin: 4px 0;
 	font-size: 7pt;
-	line-height: 7pt;
+	line-height: 100%;
 }
 .wc-item-meta p {
 	display: inline;
@@ -295,7 +295,7 @@ table.totals tr.payment_method {
 /* Ivan Nikitin */
 
 h3{
-	font-size:100%;
+
 	margin-bottom:1em;
 }
 header, footer{
