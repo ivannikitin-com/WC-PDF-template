@@ -4,6 +4,7 @@ do_action( 'wpo_wcpdf_before_document', $wpo_wcpdf->export->template_type, $wpo_
 
 // URL к папке шаблона
 $template_url = get_stylesheet_directory_uri() . '/woocommerce/pdf/IvanNikitin/';
+$template_path = get_stylesheet_directory() . '/woocommerce/pdf/IvanNikitin/';
 // Данные клиента
 $client = customer_data();
 ?>
@@ -112,14 +113,15 @@ $client = customer_data();
 			</td>
 			<td class="quantity"><?php echo $item['quantity'] ?></td>
 			<td class="price"><?php echo $item['single_line_total'] // Это стоимость товара С ВОЗМОЖНОЙ СКИДКОЙ ?></td>
-			<td class="price"><?php echo $item['line_total'] // Это стоимость всех товаров С ВОЗМОЖНОЙ СКИДКОЙ ?></td>
+			<td class="price"><?php echo $item['line_subtotal'] // line_total - Это стоимость всех товаров С ВОЗМОЖНОЙ СКИДКОЙ ?></td>
 		</tr>
-			<!--<pre><?php var_dump($item)?></pre>-->
+		<?php // file_put_contents( $template_path . 'item.log', var_export($item, true) )  ?>
 		<?php endforeach; endif; ?>
 	</tbody>
 	</table>
    <?php
 	   $totals = $this->get_woocommerce_totals();
+	   // file_put_contents( $template_path . 'totals.log', var_export($totals, true) );
 	   $order_total = $totals['order_total']['value'];
    ?>
    <table width="100%">
@@ -127,6 +129,16 @@ $client = customer_data();
 			<td width="60%"></td>
 			<td width="40%">
 					<table width="100%">
+						<?php if ( isset( $totals['discount'] ) ) : ?>
+						<tr>
+							<td align="center"><h4>Итого:</h4></td>
+							<td align="right"><h4><?php echo $totals['cart_subtotal']['value'] ?></h4></td>							
+						</tr>						
+						<tr>
+							<td align="center"><h4>Скидка:</h4></td>
+							<td align="right"><h4><?php echo $totals['discount']['value'] ?></h4></td>							
+						</tr>
+						<?php endif ?>
 						<tr>
 							<td align="center"><h4>Итого к оплате:</h4></td>
 							<td align="right"><h4><?php echo $order_total ?></h4></td>

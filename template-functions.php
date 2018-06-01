@@ -78,8 +78,12 @@ function path(){
 //возвращаем данные клиента
 function customer_data(){
      global $wpo_wcpdf;
+	
+	$company = $wpo_wcpdf->export->order->data['billing']['company'];
+	$customerName = $wpo_wcpdf->export->order->data['billing']['last_name'] . ' ' . $wpo_wcpdf->export->order->data['billing']['first_name'];
+	
      return array(
-        "name_company" => $wpo_wcpdf->export->order->data['billing']['company'],  
+        "name_company" => ( ! empty( $company ) ) ? $company : $customerName,  
         "phone" => $wpo_wcpdf->export->order->data['billing']['phone'],
         "address" => $wpo_wcpdf->export->order->data['billing']['address_1'],
         //получаем платёжные данные покупателя
