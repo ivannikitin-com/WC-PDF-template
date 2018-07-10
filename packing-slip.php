@@ -70,6 +70,28 @@ $client = customer_data();
 			<td class="price"><?php echo $item['line_subtotal'];?></td>
 		</tr>
 		<?php endforeach; endif; ?>
+		<?php	
+		//вывод Сборов
+		$items = $wpo_wcpdf->export->order->get_fees(); if( sizeof( $items ) > 0 ) : foreach( $items as $item_id => $item ) :
+		 ?>
+
+		<tr class="">
+			<td>
+				<?php echo $i++; ?>
+			</td>
+			<td class="product">
+				<div style="text-align:left">
+				<span class="item-name"><?php echo $item['name']; ?></span>
+				</div>	
+			</td>
+			<td class="quantity"> </td>
+			<td class="price"> </td>
+			<td class="price"><?php echo $item['amount'] // line_total - Это стоимость всех товаров С ВОЗМОЖНОЙ СКИДКОЙ ?></td>
+		</tr>
+		<?php // file_put_contents( $template_path . 'item.log', var_export($item, true) )  ?>
+		<?php endforeach; endif; ?>				
+			
+			
 	</tbody>
 	</table>
    <?php
